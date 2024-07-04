@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "main/index.js",
   "author": {
-    "name": "Maximilian Stümpfl"
+    "name": "Daniel"
   },
   "description": "Starter using Vite 2+ React +Typescript + Electron for fast prototyping.",
   "keywords": [
@@ -14,12 +14,13 @@
     "typescript"
   ],
   "repository": {
-    "url": "https://github.com/lTimeless/vite-reactts-electron-starter"
+    "url": ""
   },
   "productName": "vite-reactts-electron-starter",
   "scripts": {
     "dev": "concurrently \"yarn dev:vite\" \" yarn dev:electron\"",
     "dev:vite": "vite",
+    "test": "vitest",
     "dev:electron": "npm run build:electron && electron .",
     "build": "npm run build:vite && npm run build:electron",
     "build:vite": "vite build",
@@ -32,33 +33,34 @@
     "lint:fix": "eslint . --ext js,jsx,ts,tsx --fix"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^1.2.0",
+    "@vitejs/plugin-react": "^4.0.0",
     "electron-is-dev": "^2.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "vite": "^2.8.6"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite": "^4.3.5"
   },
   "devDependencies": {
-    "@types/node": "^17.0.22",
-    "@types/react": "^17.0.41",
-    "@types/react-dom": "^17.0.14",
-    "@typescript-eslint/eslint-plugin": "5.16.0",
-    "@typescript-eslint/parser": "5.16.0",
-    "autoprefixer": "^10.4.4",
-    "concurrently": "^7.0.0",
-    "electron": "^17.1.2",
-    "electron-builder": "^22.14.13",
-    "eslint": "8.11.0",
+    "@types/node": "^20.1.1",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "@typescript-eslint/eslint-plugin": "5.59.5",
+    "@typescript-eslint/parser": "5.59.5",
+    "autoprefixer": "^10.4.14",
+    "concurrently": "^8.0.1",
+    "electron": "^24.2.0",
+    "electron-builder": "^23.6.0",
+    "eslint": "8.40.0",
     "eslint-config-airbnb": "19.0.4",
-    "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "^7.29.4",
-    "postcss": "^8.4.12",
-    "prettier": "2.6.0",
-    "tailwindcss": "^3.0.23",
-    "typescript": "^4.6.2"
+    "eslint-config-prettier": "8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "postcss": "^8.4.23",
+    "prettier": "2.8.8",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.0.4",
+    "vitest": "^1.6.0"
   },
   "build": {
     "asar": true,
