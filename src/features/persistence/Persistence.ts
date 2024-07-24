@@ -18,7 +18,7 @@ class Persistence {
             const parsedData = JSON.parse(data);
             if(Object.keys(parsedData)){
                 this.store = parsedData;
-            }            
+            }
         });
     } 
     private createFile = ()=> { 
@@ -36,8 +36,7 @@ class Persistence {
         }        
         return this.store[keyName];
     }
-    constructor(){        
-        this.loadDB = this.loadDB.bind(this)
+    constructor(){ 
         this.loadDB()        
     }
 }
