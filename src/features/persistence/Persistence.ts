@@ -4,12 +4,12 @@ class Persistence {
     private saveBoxURL: string | undefined = process.env.SAVEBOXURL;
     private store: Record<string,string> = {}
 
-    private checkSaveUrl = ()=>{
+    private checkSaveUrl = ()=> {
          if(typeof this.saveBoxURL === 'undefined'){
             throw new Error('undefined store URL');
         }   
     }    
-    loadDB = ()=>{       
+    private loadDB = ()=> {       
         this.checkSaveUrl();        
         fs.readFile(`${this.saveBoxURL}store.json`, 'utf8', (err, data)=>{
             if(err){
@@ -21,7 +21,7 @@ class Persistence {
             }            
         });
     } 
-    private createFile = ()=>{ 
+    private createFile = ()=> { 
         this.checkSaveUrl();       
         fs.writeFile(`${this.saveBoxURL}store.json`, "{  }", (e)=> {
             if(e){
@@ -30,7 +30,7 @@ class Persistence {
             console.log('write succed!!');
         })
     }
-    searchByKey = (keyName: string): string | undefined =>{
+    searchByKey = (keyName: string): string | undefined => {
         if(!Object.keys(this.store)){
             throw new Error("undefined store");
         }        
