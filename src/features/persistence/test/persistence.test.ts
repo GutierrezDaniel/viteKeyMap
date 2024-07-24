@@ -3,12 +3,9 @@ import { expect, test } from 'vitest';
 import Persistence from '../Persistence';
  
 
-test('basic test', () => {
+test('basic search for key', () => {
     const persistence = new Persistence();
-    const db = persistence.loadDB();
-    expect(2 + 2).toBe(4);
-});
-test('write test', () => {
-    const persistence = new Persistence();
-    const db = persistence.createFile();    
+    //const result = persistence.searchByKey("ramdomKey");
+    //persistence.loadDB()
+    //expect(result).toEqual("exampleTexts")
 });

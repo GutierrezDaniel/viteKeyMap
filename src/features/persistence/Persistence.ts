@@ -1,23 +1,44 @@
 
 import fs from 'node:fs';
-
 class Persistence {
-    saveBoxURL = process.env.SAVEBOXURL;
-    loadDB() {        
-        fs.readFile(`${this.saveBoxURL}test.txt`, 'utf8', (e, data) => {
-            if (e) {
-                console.log('a', JSON.stringify(e, null, 2))
+    private saveBoxURL: string | undefined = process.env.SAVEBOXURL;
+    private store: Record<string,string> = {}
+
+    private checkSaveUrl = ()=>{
+         if(typeof this.saveBoxURL === 'undefined'){
+            throw new Error('undefined store URL');
+        }   
+    }    
+    loadDB = ()=>{       
+        this.checkSaveUrl();        
+        fs.readFile(`${this.saveBoxURL}store.json`, 'utf8', (err, data)=>{
+            if(err){
+                throw new Error('something went wrong!!')
             }
-            console.log('check', JSON.stringify(data, null, 2))
-        })
-    }
-    createFile(){        
-        fs.writeFile(`${this.saveBoxURL}createDb.txt`, "TEXT CONTENT FOR CHECK", (e)=> {
+            const parsedData = JSON.parse(data);
+            if(Object.keys(parsedData)){
+                this.store = parsedData;
+            }            
+        });
+    } 
+    private createFile = ()=>{ 
+        this.checkSaveUrl();       
+        fs.writeFile(`${this.saveBoxURL}store.json`, "{  }", (e)=> {
             if(e){
                 console.log("error found", e)
             }
             console.log('write succed!!');
         })
+    }
+    searchByKey = (keyName: string): string | undefined =>{
+        if(!Object.keys(this.store)){
+            throw new Error("undefined store");
+        }        
+        return this.store[keyName];
+    }
+    constructor(){        
+        this.loadDB = this.loadDB.bind(this)
+        this.loadDB()        
     }
 }
 
