@@ -8,3 +8,7 @@ test('basic test', () => {
     const db = persistence.loadDB();
     expect(2 + 2).toBe(4);
 });
+test('write test', () => {
+    const persistence = new Persistence();
+    const db = persistence.createFile();    
+});

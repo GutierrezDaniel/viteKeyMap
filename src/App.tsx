@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import AppBar from "./AppBar";
-import LoggedInApp from "./components/LoggedInApp";
-import Login from "./components/Login";
+import React, { useState } from 'react';
+import AppBar from './AppBar';
+import LoggedInApp from './components/LoggedInApp';
+import Login from './components/Login';
 
 function App() {
   const [isLogedIn, setIsLogedIn] = useState(false);
@@ -14,11 +14,7 @@ function App() {
         </div>
       )}
       <div className="flex justify-center items-center bg-neutral-800 h-screen">
-        {isLogedIn ? (
-          <LoggedInApp setValid={setIsLogedIn} />
-        ) : (
-          <Login setValid={setIsLogedIn} />
-        )}
+        {isLogedIn ? <LoggedInApp setValid={setIsLogedIn} /> : <Login setValid={setIsLogedIn} />}
       </div>
     </div>
   );
