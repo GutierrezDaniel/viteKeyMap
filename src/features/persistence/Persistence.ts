@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 
 class Persistence {
     private saveBoxURL: string | undefined = process.env.SAVEBOXURL;
+    private static instanceOfStore: Persistence;
     private store: Record<string,string> = {}
     private constructor(){}
     private checkSaveUrl = ()=> {
@@ -26,9 +27,11 @@ class Persistence {
         return this.store[keyName];
     } 
     static async connectStore(){
-        const instancedStore = new Persistence();
-        await instancedStore.loadDB();
-        return instancedStore;
+        if(!this.instanceOfStore){
+            this.instanceOfStore = new Persistence();
+            await this.instanceOfStore.loadDB();
+        } 
+        return this.instanceOfStore;
     }
 }
 
