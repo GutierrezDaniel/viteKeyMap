@@ -3,9 +3,8 @@ import { expect, test } from 'vitest';
 import Persistence from '../Persistence';
  
 
-test('basic search for key', () => {
-    const persistence = new Persistence();
-    //const result = persistence.searchByKey("ramdomKey");
-    //persistence.loadDB()
-    //expect(result).toEqual("exampleTexts")
+test('basic search for key', async() => {    
+    const store = await Persistence.connectStore();    
+    const result = store.searchByKey("ramdomKey");    
+    expect(result).toEqual("exampleTexts")
 });
