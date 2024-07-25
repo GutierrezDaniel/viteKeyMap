@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 
 
 class Persistence {
-    private saveBoxURL: string | undefined = process.env.SAVEBOXURL;
+    private saveBoxURL?: string = process.env.SAVEBOXURL;
     private static instanceOfStore: Persistence;
     private store: Record<string,string> = {}
     private constructor(){}
