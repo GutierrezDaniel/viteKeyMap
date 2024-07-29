@@ -1,6 +1,6 @@
 
 import { expect, test } from 'vitest';
-import Persistence from '../Persistence';
+import Persistence from '../persistence';
  
 
 test('basic search for key', async() => {    
