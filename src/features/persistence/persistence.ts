@@ -28,7 +28,7 @@ class Persistence {
     } 
     static async connectStore(){
         if(!this.instanceOfStore){
-            this.instanceOfStore = new Persistence();
+            this.instanceOfStore = new Persistence;
             await this.instanceOfStore.loadDB();
         } 
         return this.instanceOfStore;
