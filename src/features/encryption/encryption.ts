@@ -9,14 +9,19 @@ export default class Encryption {
             byte => byte.toString(16).padStart(2, '0')
         ).join('');
 
-    async createHashedKey(baseKey: string): Promise<string>{
-        const encoder = new TextEncoder();
-        const encodedKey = encoder.encode(baseKey);
+    async createHashedKey(baseKey: string): Promise<string>{        
         if(typeof this.choosedAlgorithm === "undefined"){
-            throw new Error('invalid encryption algoritm')
+            throw new Error('invalid encryption algorithm')
         }
+        const encoder = new TextEncoder();
+        const encodedKey = encoder.encode(baseKey);        
         const hashedKey = await crypto.subtle.digest(this.choosedAlgorithm,encodedKey)
-        return this.convertByteToHexString(Array.from(new Uint8Array(hashedKey)))        
+        const hexKey = this.convertByteToHexString(Array.from(new Uint8Array(hashedKey))) 
+        this.currentKey = hexKey;
+        return hexKey;
+    }
+    getCurrentKey(): string | undefined{
+        return this.currentKey;
     }
     static getInstance(){
         if(!this.instanceOfEncription){
