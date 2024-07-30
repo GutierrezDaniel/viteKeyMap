@@ -21,7 +21,31 @@ export default class Encryption {
         this.textBaseKey = baseKey;
         this.currentKey = hexKey;
         return hexKey;
-    }    
+    } 
+    async encrypt(plainText: string){
+        if(!this.textBaseKey){
+            throw new Error("key not found");
+        }
+        const iv = crypto.randomBytes(16);
+        const rehasedKey = crypto.createHash('sha256').update(this.textBaseKey).digest('base64');
+        const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(rehasedKey, 'base64'), iv);
+        let encrypted = cipher.update(plainText, 'utf8', 'base64');
+        encrypted += cipher.final('base64');
+        return iv.toString('base64') + ':' + encrypted;
+    }
+    async decrypt(enText: string){
+        if(!this.textBaseKey){
+            throw new Error("key not found");
+        }
+        const [ivE, ...encTxt] = enText.split(':');
+        const iv = Buffer.from(ivE, 'base64');        
+        const encryptedText = encTxt.join(':');
+        const rehasedKey = crypto.createHash('sha256').update(this.textBaseKey).digest('base64');
+        const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(rehasedKey, 'base64'), iv);
+        let decrypted = decipher.update(encryptedText, 'base64', 'utf8');
+        decrypted += decipher.final('utf8');
+        return decrypted;
+    } 
     getCurrentKey(): string | undefined {
         return this.currentKey;
     }
