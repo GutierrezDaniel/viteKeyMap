@@ -28,22 +28,20 @@ export default class Encryption {
     const iv = crypto.randomBytes(16);
     const rehasedKey = crypto.createHash('sha256').update(this.textBaseKey).digest('base64');
     const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(rehasedKey, 'base64'), iv);
-    let encrypted = cipher.update(plainText, 'utf8', 'base64');
-    encrypted += cipher.final('base64');
-    return iv.toString('base64') + ':' + encrypted;
+    return `${iv.toString('base64')}:${cipher.update(plainText, 'utf8', 'base64') + cipher.final('base64')}`;
   }
 
   async decrypt(enText: string) {
     if (!this.textBaseKey) {
       throw new Error('key not found');
     }
-    const [ivE, ...encTxt] = enText.split(':');
-    const encryptedText = encTxt.join(':');
+    const [ivEncrypted, ...restOfValue] = enText.split(':');
+    const encryptedText = restOfValue.join(':');
     const rehasedKey = crypto.createHash('sha256').update(this.textBaseKey).digest('base64');
     const decipher = crypto.createDecipheriv(
       'aes-256-cbc',
       Buffer.from(rehasedKey, 'base64'),
-      Buffer.from(ivE, 'base64')
+      Buffer.from(ivEncrypted, 'base64')
     );
     return JSON.parse(decipher.update(encryptedText, 'base64', 'utf8') + decipher.final('utf8'));
   }
