@@ -32,7 +32,8 @@ export default class Encryption {
     encrypted += cipher.final('base64');
     return iv.toString('base64') + ':' + encrypted;
   }
-  async decrypt(enText: string): Promise<Record<string, string>> {
+
+  async decrypt(enText: string) {
     if (!this.textBaseKey) {
       throw new Error('key not found');
     }
