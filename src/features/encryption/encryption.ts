@@ -38,13 +38,14 @@ export default class Encryption {
       throw new Error('key not found');
     }
     const [ivE, ...encTxt] = enText.split(':');
-    const iv = Buffer.from(ivE, 'base64');
     const encryptedText = encTxt.join(':');
     const rehasedKey = crypto.createHash('sha256').update(this.textBaseKey).digest('base64');
-    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(rehasedKey, 'base64'), iv);
-    let decrypted = decipher.update(encryptedText, 'base64', 'utf8');
-    decrypted += decipher.final('utf8');
-    return JSON.parse(decrypted);
+    const decipher = crypto.createDecipheriv(
+      'aes-256-cbc',
+      Buffer.from(rehasedKey, 'base64'),
+      Buffer.from(ivE, 'base64')
+    );
+    return JSON.parse(decipher.update(encryptedText, 'base64', 'utf8') + decipher.final('utf8'));
   }
   getCurrentKey(): string | undefined {
     return this.currentKey;
