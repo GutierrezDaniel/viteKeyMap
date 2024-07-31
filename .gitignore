@@ -11,6 +11,7 @@ dist-ssr
 
 # usage
 /src/saveBox
+/src/coverage
 
 # debug
 npm-debug.log*
