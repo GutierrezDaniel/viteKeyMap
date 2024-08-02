@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import AppBar from './AppBar';
 import LoggedInApp from './components/LoggedInApp';
 import Login from './components/Login';
-import ControlPlane from './features/controlPlane/ControlPlane';
+import UserProvider from './features/controlPlane/ControlPlane';
 
 function App() {
   const [isLogedIn, setIsLogedIn] = useState(false);
 
   return (
-    <ControlPlane>
+    <UserProvider>
       <div className="flex flex-col h-screen overflow-hidden">
         {window.Main && (
           <div className="flex-none">
@@ -19,7 +19,7 @@ function App() {
           {isLogedIn ? <LoggedInApp setValid={setIsLogedIn} /> : <Login setValid={setIsLogedIn} />}
         </div>
       </div>
-    </ControlPlane>
+    </UserProvider>
   );
 }
 

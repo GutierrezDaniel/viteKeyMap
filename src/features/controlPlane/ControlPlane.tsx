@@ -1,14 +1,14 @@
 import React, { createContext, useState } from 'react';
 
-type UserInfo = {
+type UserData = {
   isValidHash: boolean;
   savedAccounts?: Record<string, unknown>;
 };
-export const UserProvider = createContext({});
-const ControlPlane = ({ children }: { children?: React.ReactNode }) => {
-  const [userInfo, setUserInfo] = useState<UserInfo>({ isValidHash: false });
+export const UserContext = createContext({});
+const UserProvider = ({ children }: { children?: React.ReactNode }) => {
+  const [userData, setUserData] = useState<UserData>({ isValidHash: false });
 
-  return <UserProvider.Provider value={userInfo}>{children}</UserProvider.Provider>;
+  return <UserContext.Provider value={userData}>{children}</UserContext.Provider>;
 };
 
-export default ControlPlane;
+export default UserProvider;

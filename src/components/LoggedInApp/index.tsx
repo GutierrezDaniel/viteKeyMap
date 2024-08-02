@@ -2,12 +2,11 @@ import React, { useContext, useState } from 'react';
 import ModalEdit from '../ModalEdit';
 import PasswordCard from '../PasswordCard';
 import { arrayMock } from './arrayMock';
-import { UserProvider } from '../../features/controlPlane/ControlPlane';
+import { UserContext } from '../../features/controlPlane/ControlPlane';
 
 const LoggedInApp = ({ setValid }: { setValid: (p: boolean) => void }): JSX.Element => {
   const [editModalVisible, setEditModalVisible] = useState<boolean>(false);
-  const contexto = useContext(UserProvider);
-  console.log('check contxt', JSON.stringify({ contexto }, null, 2));
+  const contexto = useContext(UserContext);
   return (
     <div className="flex flex-col bg-zinc-700 w-full h-full">
       <button type="button" onClick={() => setValid(false)} className="text-zinc-300">
